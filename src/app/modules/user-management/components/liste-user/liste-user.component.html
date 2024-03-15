@@ -1,142 +1,73 @@
 <div class="div-main">
   <div class="title-page">
-    <h2>Liste User</h2>
+    <h2>Les Utilisateurs</h2>
 
   </div>
 
   <div class="row custom-div-liste-user">
-
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12  user-list-container">
-          <div class="menu-table-user">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <h5 class="card-title"> List <span class="text-muted fw-normal ms-2">({{userList?.length}})</span></h5>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
             
-            <div class="btn-actiontable">
-              <button mat-button class="btn-menu-table" (click)="openDialogAddUser()">
-                Add new user
-              </button>
-
-              <button mat-button [matMenuTriggerFor]="menu" class="btn-menu-table">
-                More options
-                <mat-icon>arrow_drop_down</mat-icon>
-              </button>
-
-              <mat-menu #menu="matMenu" #aboveMenu="matMenu" class="custom-mat-menu ">
-
-                <button mat-menu-item>
-                  <mat-icon>person_remove</mat-icon>
-                  <span>Remove</span>
-                </button>
-
-                <button mat-menu-item>
-                  <mat-icon>file_download</mat-icon>
-                  <span>Export</span>
-                </button>
-
-              </mat-menu>
+            <div>
+              <button class="btn btn-primary" (click)="onAddUser()"><i
+                  class="bx bx-plus me-1"></i> Add New</button>
             </div>
+           
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="">
+            <div class="table-responsive">
+              <table class="table project-list-table table-nowrap align-middle table-borderless">
+                <thead>
+                  <tr>
 
-            <div class="search-table">
-              <input class="form-control form-control-light  rounded-0 border-0 search-input-table" id="input" type="text" placeholder="Search"
-                 aria-label="Search" (keyup)="applyFilter($event)" #input>
+                    <th scope="col">Nom prénom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Role</th>
+                    <th scope="col" style="width: 200px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of userList">
+
+                    <td><img src="https://www.seekpng.com/png/detail/41-410093_male-symbol-png.png" alt=""
+                        class="avatar-sm rounded-circle me-2" /><a  class="text-body">{{user.firstName}} {{user.lastName}} <span class="badge badge-soft-primary mb-0">{{user.userName}}</span></a></td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phone}}</td>
+                    <td><span class="badge badge-soft-success mb-0">{{user.role}}</span></td>
+                    <td>
+                      <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                          <i class="bi bi-pencil"></i>
+                        </li>
+                        <li class="list-inline-item">
+                          <i class="bi bi-trash3" style="color: red;"></i>
+                        </li>
+
+                      </ul>
+                    </td>
+                  </tr>
+
+
+
+                </tbody>
+              </table>
             </div>
           </div>
-
-          <as-split direction="vertical" class="userlist-split">
-            <as-split-area [maxSize]="70" class="spliter-h">
-              
-              <div class="example-container">           
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 liste-user-table" tabindex="0">
-
-                <!-- Checkbox Column -->
-                <ng-container matColumnDef="select">
-                  <th mat-header-cell *matHeaderCellDef>
-                    <mat-checkbox (change)="$event ? toggleAllRows() : null" class="list-user-checkbox"
-                      [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-                    </mat-checkbox>
-                  </th>
-                  <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                      [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" class="list-user-checkbox">
-                    </mat-checkbox>
-                  </td>
-                </ng-container>
-
-                <!-- Position Column -->
-                <ng-container matColumnDef="position">
-                  <th mat-header-cell *matHeaderCellDef> No. </th>
-                  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                </ng-container>
-
-
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> Name </th>
-                  <td class="name" mat-cell *matCellDef="let element">
-                    <img src="../../../../../assets/images/pict-user.jpg" class="img-user-liste">
-                    {{element.name}}
-                  </td>
-                </ng-container>
-
-                <!-- Weight Column -->
-                <ng-container matColumnDef="email">
-                  <th mat-header-cell *matHeaderCellDef> Email </th>
-                  <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                </ng-container>
-
-                <!-- Action Column -->
-                <ng-container matColumnDef="action" class="btn-action">
-                  <th mat-header-cell *matHeaderCellDef> Action </th>
-                  <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button [matMenuTriggerFor]="menu" class="btn-icon-manage"
-                      aria-label="Example icon-button with a menu">
-                      <mat-icon>manage_accounts</mat-icon>
-                    </button>
-
-                    <mat-menu #menu="matMenu" #aboveMenu="matMenu" yPosition="below" xPosition="before"
-                      class="custom-mat-menu ">
-                      <button mat-menu-item (click)="openDialogEditUser()">
-                        <mat-icon>edit</mat-icon>
-                        <span>Edit </span>
-                      </button>
-
-                      <button mat-menu-item>
-                        <mat-icon>person_remove</mat-icon>
-                        <span>Remove</span>
-                      </button>
-
-                      <button mat-menu-item (click)="openDialogViewUser()">
-                        <mat-icon>visibility</mat-icon>
-                        <span>View</span>
-                      </button>
-
-                    </mat-menu>
-                  </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                <!-- Row shown when there is no matching data. -->
-                <tr class="mat-row" *matNoDataRow>
-                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                </tr>
-                </table>
-            </div>
-           </as-split-area>
-           <as-split-area  class="spliter-b">
-              <!---->
-              <mat-paginator #paginator  [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
-              </mat-paginator>
-              <!---->
-           </as-split-area>
-        </as-split>
-
         </div>
+      </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-2">
-          
-        </div>
-      
     </div>
   </div>
+</div>
