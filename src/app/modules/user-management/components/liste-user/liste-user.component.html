@@ -16,7 +16,7 @@
           <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
             
             <div>
-              <button class="btn btn-primary" (click)="onAddUser()"><i
+              <button mat-raised-button color="primary" (click)="onAddUser()"><i
                   class="bx bx-plus me-1"></i> Add New</button>
             </div>
            
@@ -49,10 +49,18 @@
                     <td>
                       <ul class="list-inline mb-0">
                         <li class="list-inline-item">
-                          <i class="bi bi-pencil"></i>
+                          <div class="example-button-container">
+                            <button mat-mini-fab color="primary" (click)="onEditUser(user)" aria-label="Example icon button with a menu icon">
+                              <mat-icon>edit</mat-icon>
+                            </button>
+                          </div>
                         </li>
                         <li class="list-inline-item">
-                          <i class="bi bi-trash3" style="color: red;"></i>
+                          <div class="example-button-container">
+                            <button mat-mini-fab (click)="deleteUser(user.id)" *ngIf="user.userName != 'admin'" color="warn" aria-label="Example icon button with a menu icon">
+                              <mat-icon>delete</mat-icon>
+                            </button>
+                          </div>
                         </li>
 
                       </ul>
