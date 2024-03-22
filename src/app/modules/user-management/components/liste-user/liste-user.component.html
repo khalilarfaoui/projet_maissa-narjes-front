@@ -14,50 +14,72 @@
         </div>
         <div class="col-md-6">
           <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-            
+
             <div>
-              <button mat-raised-button color="primary" (click)="onAddUser()"><i
-                  class="bx bx-plus me-1"></i> Add New</button>
+              <button mat-raised-button color="primary" (click)="onAddUser()"><i class="bx bx-plus me-1"></i> Add
+                New</button>
             </div>
-           
+
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-12">
           <div class="">
-            <div class="table-responsive">
-              <table class="table project-list-table table-nowrap align-middle table-borderless">
-                <thead>
+            <div>
+              <p-table [value]="userList" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[5, 10, 20]">
+                <ng-template pTemplate="header">
                   <tr>
 
-                    <th scope="col">Nom prénom</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Role</th>
-                    <th scope="col" style="width: 200px;">Action</th>
+                    <th>Nom prénom</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Action</th>
                   </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let user of userList">
+                  <tr>
+                    <th>
+                      <p-columnFilter type="text" field="firstName"></p-columnFilter>
+                    </th>
+                    <th>
+                      <p-columnFilter type="text" field="email"></p-columnFilter>
+                    </th>
+                    <th>
+                      <p-columnFilter type="text" field="phone"></p-columnFilter>
+                    </th>
+                    <th>
+                      <p-columnFilter type="text" field="role"></p-columnFilter>
+                    </th>
+                    <th></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-userList>
+                  <tr>
 
                     <td><img src="https://www.seekpng.com/png/detail/41-410093_male-symbol-png.png" alt=""
-                        class="avatar-sm rounded-circle me-2" /><a  class="text-body">{{user.firstName}} {{user.lastName}} <span class="badge badge-soft-primary mb-0">{{user.userName}}</span></a></td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.phone}}</td>
-                    <td><span class="badge badge-soft-success mb-0">{{user.role}}</span></td>
+                        class="avatar-sm rounded-circle me-2" /><a class="text-body">{{userList.firstName}}
+                        {{userList.lastName}} <span
+                          class="badge badge-soft-primary mb-0">{{userList.userName}}</span></a></td>
+                    <td>{{userList.email}}</td>
+                    <td>{{userList.phone}}</td>
+                    <td><span class="badge badge-soft-success mb-0">{{userList.role}}</span></td>
                     <td>
                       <ul class="list-inline mb-0">
                         <li class="list-inline-item">
                           <div class="example-button-container">
-                            <button mat-mini-fab color="primary" (click)="onEditUser(user)" aria-label="Example icon button with a menu icon">
+                            <button mat-mini-fab color="primary" (click)="onEditUser(userList)"
+                              aria-label="Example icon button with a menu icon">
                               <mat-icon>edit</mat-icon>
                             </button>
                           </div>
                         </li>
                         <li class="list-inline-item">
                           <div class="example-button-container">
-                            <button mat-mini-fab (click)="deleteUser(user.id)" *ngIf="user.userName != 'admin'" color="warn" aria-label="Example icon button with a menu icon">
+                            <button mat-mini-fab (click)="deleteUser(userList.id)" *ngIf="userList.userName != 'admin'"
+                              color="warn" aria-label="Example icon button with a menu icon">
                               <mat-icon>delete</mat-icon>
                             </button>
                           </div>
@@ -69,8 +91,8 @@
 
 
 
-                </tbody>
-              </table>
+                </ng-template>
+              </p-table>
             </div>
           </div>
         </div>
