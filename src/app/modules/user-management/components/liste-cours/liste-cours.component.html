@@ -1,0 +1,77 @@
+<div class="div-main">
+    <div class="title-page">
+      <h2>Les Cours</h2>
+  
+    </div>
+    <div class="row custom-div-liste-cours">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <h5 class="card-title"> List <span class="text-muted fw-normal ms-2">({{coursList?.length}})</span></h5>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                  
+                  <div>
+                    <button mat-raised-button color="primary" (click)="onAddCours()"><i
+                        class="bx bx-plus me-1"></i> Add New</button>
+                  </div>
+                 
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="">
+                  <div class="table-responsive">
+                    <table class="table project-list-table table-nowrap align-middle table-borderless">
+                      <thead>
+                        <tr>
+      
+                          <th scope="col">Titre</th>
+                          <th scope="col">Description</th>
+                          
+                          <th scope="col" style="width: 200px;">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let cours of coursList">
+      
+       
+                          <td><span class="badge badge-soft-success mb-0">{{cours.titre}}</span></td>
+                          <td>{{cours.description}}</td>
+                      
+                          <td>
+                            <ul class="list-inline mb-0">
+                              <li class="list-inline-item">
+                                <div class="example-button-container">
+                                  <button mat-mini-fab color="primary" (click)="onEditCours(cours)" aria-label="Example icon button with a menu icon">
+                                    <mat-icon>edit</mat-icon>
+                                  </button>
+                                </div>
+                              </li>
+                              <li class="list-inline-item">
+                                <div class="example-button-container">
+                                  <button mat-mini-fab (click)="deleteCours(cours.id)"  color="warn" aria-label="Example icon button with a menu icon">
+                                    <mat-icon>delete</mat-icon>
+                                  </button>
+                                </div>
+                              </li>
+      
+                            </ul>
+                          </td>
+                        </tr>
+      
+      
+      
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </div>

@@ -1,0 +1,41 @@
+<div class="w-100 title-dialog">
+    <H2>Add Cours</H2>
+    <hr>
+</div>
+<div mat-dialog-content class="dialog-cours" style="width: 50rem;">
+    <form [formGroup]="addForm">
+        <div class="row mb-1">
+            <div class="col">
+                <div class="row">
+                    <form [formGroup]="addForm">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Titre du Cours</mat-label>
+                                    <input formControlName="titre" matInput placeholder="Titre du Cours">
+                                    <mat-error *ngIf="addForm.controls['titre'].hasError('required')">
+                                        Le titre est <strong>requis</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Description du Cours</mat-label>
+                                    <textarea formControlName="description" matInput placeholder="Description du cours"></textarea>
+                                    <mat-error *ngIf="addForm.controls['description'].hasError('required')">
+                                        Description est <strong>requis</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                            
+                    
+                        <div class="row dialog-action">
+                            <button mat-raised-button class="btn-save btn-dialog-action" [disabled]="addForm.invalid" (click)="saveCours()"
+                                color="primary">Enregistrer</button>
+                            <button mat-raised-button class="btn-cancel btn-dialog-action" color="warn" mat-dialog-close>Annuler</button>
+                        </div>
+                    </form>
+                    

@@ -1,0 +1,23 @@
+<div class="w-100 title-dialog">
+    <H2>Edit Cours</H2>
+    <hr>
+</div>
+
+
+<div mat-dialog-content class="dialog-user" style="width: 50rem;">
+    <form [formGroup]="editForm">
+        <div class="row mb-1">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Titre</mat-label>
+                            <input formControlTitre="Titre" matInput placeholder="Titre">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <div class="row dialog-action">
+                            <button mat-raised-button class="btn-save btn-dialog-action" (click)="editCours()" color="primary">Save</button>
+                            <button mat-raised-button class="btn-cancel btn-dialog-action" color="warn" mat-dialog-close>Cancel</button>
+                        </div>
